@@ -4,3 +4,6 @@ from django.shortcuts import render
 
 def index(request):
     return render(request, 'login.html')
+
+def starter(request):
+    return render(request, 'starter.html')
