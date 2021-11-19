@@ -1,32 +1,38 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <title>começo</title>
 </head>
 <body>
   <div class="barra">
     <lu>
-      <li><a>home</a></li>
+      <li><a>Entrar</a></li>
+      <li><a>Home</a></li>
+      <li><a>Sobre</a></li>
+      <li><a>Quem Somos?</a></li>
     </lu>
   </div>
-<style>
-  .barra {
-  background-color: black;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 65px;
-}
-a{
-  color: white;
-  position: fixed;
-  text-decoration: none;
-  font-size: large;
-}
-</style>
+<div class="container">
+  <div class="paragrafo">
+    <h1>Seja Bem Vindo</h1>
+    <h2>Você sabe usar os tipos de alinhamento de texto usando CSS? Sabe porque a 
+      tag CENTER não existe mais? Sabe como criar o recuo inicial de um parágrafo
+       usando folhas de estilo? Pois acompanhe este vídeo até o final para responder
+        a estas e muitas outras perguntas.
+  </h2>
+  <h3>
+    As placas foram instaladas próximas a um dos mosteiros da região. A Diocese de 
+    Anápolis informou por telefone que não tem relação com as mensagens espalhadas
+    na região. O g1 questionou a Prefeitura de Anápolis às 11h se a instalação desse 
+    tipo de placa fere alguma norma do município ou se houve alguma denúncia, mas não 
+    teve resposta até a última atualização dessa reportagem.
+  </h3>
+  </div>
+</div>
 </body>
 </html>

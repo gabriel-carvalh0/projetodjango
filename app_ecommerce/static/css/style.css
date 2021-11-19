@@ -1,0 +1,43 @@
+*{
+    margin: 0 auto;
+    padding:0;
+    box-sizing:border-box;
+  }
+.barra{
+  list-style: none;
+  padding: 0;
+  background-color: black;
+}
+
+.barra li{
+  display: inline;
+}
+.barra li a{
+  color:#FFF;
+  padding: 20px;
+  display: inline-block;
+  text-decoration:none;
+}
+.container{
+background-color: #EEE;
+height: 100vh;
+position: relative;
+}
+.paragrafo h3{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.paragrafo h2{
+    position: absolute;
+    top: 80%;
+    left: 60%;
+    transform: translate(-80%, -60%);
+}
+.paragrafo h1{
+    position: absolute;
+    top: 20%;
+    left: 45%;
+    transform: translate(-20%, -45%);
+}
