@@ -18,7 +18,9 @@ from django.urls import path
 from app_ecommerce import views
 
 urlpatterns = [
-    path('', views.starter),
-    path('1/', views.index),
+    path('', views.index, name='index'),
+    path('contato/', views.contact, name='contact'),
+    path('produto/', views.product, name='product'),
+    path('produtos/', views.product_list, name='product_list'),
     path('admin/', admin.site.urls),
 ]
