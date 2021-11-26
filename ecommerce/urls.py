@@ -21,7 +21,6 @@ from app_ecommerce import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('contato/', views.contact, name='contact'),
-    path('produto/', views.product, name='product'),
-    path(r'^produtos/', include(('catalog.urls', 'catalog' ), namespace='catalog')),
+    path(r'^catalogo/', include(('catalog.urls', 'catalog' ), namespace='catalog')),
     path('admin/', admin.site.urls),
 ]
