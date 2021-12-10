@@ -128,6 +128,12 @@ STATIC_URL = '/static/'
 STATICFIELS_DIRS = [
     os.path.join(BASE_DIR, 'staticfiles')
 ]
+# Email
+EMAIL_HOST = ''
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+DEFAULT_FROM_EMAIL = 'admin@djangoecommerce.com'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
