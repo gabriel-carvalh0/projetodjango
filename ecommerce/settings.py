@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
-from dados import env
+from app_dados import env
 
 # from dados import envsample
 
@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # libs
     'widget_tweaks',
+    # dados
+    'app_dados',
     # apps
     'app_ecommerce',
     'catalog',  
