@@ -1,11 +1,7 @@
-from django.core.exceptions import RequestAborted
+# from django.core.exceptions import RequestAborted
 from django.shortcuts import render
 
-# Create your views here.
-
-
-from django.shortcuts import render
-from django.http import HttpResponse
+# from django.http import HttpResponse
 from app_ecommerce.forms import ContactForm
 
 from catalog.models import Category
@@ -30,7 +26,7 @@ def contact(request):
             message = 'Nome{0}/nE-Mail:{1}/n{2}'.format(name, email, message)
             send_mail(
                 'Contato Do Django E-Commerce', message, settings.DEFAULT_FROM_EMAIL,
-                [settings.DEFAULT_FROM_EMAIL    ]
+                [ settings.DEFAULT_FROM_EMAIL ]
              )
     else:
         form = ContactForm()

@@ -1,3 +1,6 @@
 db.sqlite3
 **/__pycache__/
 **/migrations/__pycache__/
+**/migrations/*[0-9]*.py
+dados/env.py
+dados/env.sample.py
