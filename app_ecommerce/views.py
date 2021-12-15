@@ -7,14 +7,14 @@ from app_ecommerce.forms import ContactForm
 from catalog.models import Category
 from django.core.mail import send_mail
 from django.conf import settings
+from django.views.generic import View, TemplateView
 
 
-def index(request):
-    context = {
-        'categories': Category.objects.all()
-    }
-    return render(request, 'index.html', context)
+class IndexView(TemplateView):
 
+    template_name = 'index.html'
+
+index = IndexView.as_view()
 
 def contact(request):
     success = False
