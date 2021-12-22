@@ -2,7 +2,7 @@
     <style>
         .paginator {
           display: inline-block;
-          text-decoration: none;
+          flex-grow: 1;
         }
         
         .paginator a {
@@ -12,6 +12,9 @@
           text-decoration: none;
           transition: background-color .3s;
           border: 1px solid #ddd;
+        }
+        .paginator li {
+          list-style-type: none;
         }
         
         .paginator a.active {
@@ -26,11 +29,13 @@
 <div class="row">
     <div class="col-md-12">
         <nav>
+          <footer>
             <ul class="paginator">
                 {% for page in paginator.page_range %}
                 <li {% if page_obj.number == page %} class="active"{% endif %}><a href="?page={{ page }}{{ getvars }}">{{ page }}</a></li>
                 {% endfor %}
             </ul>
+          </footer>  
         </nav>
     </div>
 </div> 
