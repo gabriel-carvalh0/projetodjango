@@ -17,11 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
 from app_ecommerce import views
-
+from django.contrib.auth.views import LoginView,  LogoutView
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name="index.html"), name='index'),
     path('contato/', views.contact, name='contact'),
+    path('entrar/', LoginView.as_view(template_name='login.html'), name='login'),
+#    path('sair/', logout_then_login, {'next_page':'index'}, name='logout'),
+    path('sair/', LogoutView, {'next_page':'index'},  name='logout'),
+
     path(r'^catalogo/', include(('catalog.urls', 'catalog' ), namespace='catalog')),
     path('admin/', admin.site.urls),
 ]

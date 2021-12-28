@@ -143,6 +143,12 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+# Auth
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
