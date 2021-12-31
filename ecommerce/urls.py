@@ -24,7 +24,7 @@ urlpatterns = [
     path('contato/', views.contact, name='contact'),
     path('entrar/', LoginView.as_view(template_name='login.html'), name='login'),
 #    path('sair/', logout_then_login, {'next_page':'index'}, name='logout'),
-    path('sair/', LogoutView, {'next_page':'index'},  name='logout'),
+    path('sair/', LogoutView.as_view(), {'next_page':'index'},  name='logout'),
 
     path(r'^catalogo/', include(('catalog.urls', 'catalog' ), namespace='catalog')),
     path('admin/', admin.site.urls),
