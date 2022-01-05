@@ -23,7 +23,7 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name="index.html"), name='index'),
     path('contato/', views.contact, name='contact'),
     path('entrar/', LoginView.as_view(template_name='login.html'), name='login'),
-#    path('sair/', logout_then_login, {'next_page':'index'}, name='logout'),
+    path('registro/', views.register, name='register'),
     path('sair/', LogoutView.as_view(), {'next_page':'index'},  name='logout'),
 
     path(r'^catalogo/', include(('catalog.urls', 'catalog' ), namespace='catalog')),
