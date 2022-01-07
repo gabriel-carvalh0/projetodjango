@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # apps
     'app_ecommerce',
     'catalog',  
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -148,6 +149,7 @@ LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'
+AUTH_USER_MODEL = 'accounts.User'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

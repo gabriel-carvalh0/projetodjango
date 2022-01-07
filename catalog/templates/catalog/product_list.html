@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% load pagination %}
 
 {% block title %}
@@ -26,5 +25,5 @@
         {% endfor %}
     </div>
     {% pagination request paginator page_obj %}
-    {% endblock %}
+    
 {% endblock %}
