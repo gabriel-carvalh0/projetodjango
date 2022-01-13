@@ -37,7 +37,7 @@
 				<a href="{% url 'contact' %}">Contato</a>
 			</li>
       <li>
-        <a href="{% url 'register' %}">Registrar Uma Conta</a>
+        <a href="{% url 'accounts:register' %}">Registrar Uma Conta</a>
       </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -45,6 +45,7 @@
             <li><a href="{% url 'logout' %}">Sair</a></li>
             {% else %}
             <li><a href="{% url 'login' %}">Entrar</a></li>
+            <li><a href="{% url 'accounts:register' %}">Registrar-se</a></li>
             {% endif %}
           </ul>
         </div>
