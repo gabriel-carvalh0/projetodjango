@@ -13,10 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import imp
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
 from app_ecommerce import views
+
 from django.contrib.auth.views import LoginView,  LogoutView
 
 urlpatterns = [
@@ -25,6 +27,6 @@ urlpatterns = [
     path('entrar/', LoginView.as_view(template_name='login.html'), name='login'),
     path('sair/', LogoutView.as_view(), {'next_page':'index'},  name='logout'),
     path(r'^catalogo/', include(('catalog.urls', 'catalog' ), namespace='catalog')),
-    path(r'^conta', include(('accounts.urls', 'accounts'), namespace='accounts')),
+    path(r'^conta/', include(('accounts.urls', 'accounts'), namespace='accounts')),
     path('admin/', admin.site.urls),
 ]
