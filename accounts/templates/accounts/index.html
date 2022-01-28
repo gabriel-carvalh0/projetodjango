@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Minha Conta {% endblock %}
+
+<head>
+<link rel="stylesheet" href="{% static 'assets/extra.css' %}"/>
+</head>
+<body>
+  <div class="container">
+    {% block container %}
+    <ol class="breadcrumb">
+      <li><a href="#">Início</a></li>
+      <li class="active">Minha Conta</li>
+    </ol>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="list-group">
+              <a href="#" class="list-group-item active">Minha Conta</a>
+              <a href="{% url 'accounts:update_user' %}" class="list-group-item" method="POST">Alterar Dados</a>
+              <a href="{% url 'accounts:update_password' %}" class="list-group-item" method="POST">Alterar Senha</a>
+            </div>
+        </div>
+        <div class="col-md-8">
+            {% block accounts_container%}
+              <h2>Seja Bem vindo "{{ user.name }}" </h2>
+            {% endblock %}
+        </div>
+    </div>
+    {% endblock %}
+  </div>
+</body>

@@ -17,7 +17,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         ], help_text='Um nome curto que será usado para identificá-lo de forma única na plataforma'
     )
     name = models.CharField('Nome', max_length=100, blank=True)
-    email = models.EmailField('E-mail')
+    email = models.EmailField('E-mail', unique=True)
     is_staff = models.BooleanField('Equipe', default=False)
     is_active = models.BooleanField('ativo', default=True)
     date_joined = models.DateTimeField('Data De Entrada', auto_now_add=True)

@@ -1,11 +1,13 @@
 
 from django.urls import path
-from accounts import views
+from .views import * 
 
-
+app_name = 'accounts'
 
 
 urlpatterns = [
-    path(r'^$', views.index, name='index'),
-    path(r'^registro/$', views.register, name='register'),
+    path('', index, name='index'),
+    path(r'^ alterar-dados/$', update_user, name='update_user'),
+    path(r'^ alterar-senha/$', update_password, name='update_password'),
+    path(r'^registro/$', register, name='register'),
 ]
