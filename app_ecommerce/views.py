@@ -3,10 +3,8 @@ from django.shortcuts import render
 
 # from django.http import HttpResponse
 from app_ecommerce.forms import ContactForm
-
 from django.urls import reverse_lazy       
-from django.contrib.auth.forms import UserCreationForm
-
+from django.contrib import messages
 from catalog.models import Category
 from django.core.mail import send_mail
 from django.conf import settings
@@ -28,6 +26,8 @@ def contact(request):
     if form.is_valid():
         form.send_mail()
         success = True
+    elif request.method == 'POST':
+        messages.error(request, 'Formulário inválido')
     context = {
         'form': form,
         'success': success
