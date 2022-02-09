@@ -1,3 +1,4 @@
+from socket import CAN_EFF_FLAG
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404 
@@ -22,49 +23,30 @@ class CreateCartItemView(RedirectView):
         cart_item, created = CartItem.objects.add_item(
             self.request.session.session_key, product
         )
-        # cart_item, created = CartItemManager().add_item(
-        #     self.request.session.session_key, product  
-        # )
         if created:
             messages.success(self.request, 'Produto adicionado com sucesso')
         else:
             messages.info(self.request, 'Produto atualizado com sucesso')
-        return product.get_absolute_url()
+        return reverse('checkout:cart_item')
 
 
-# class CartItemView(TemplateView):
+class CartItemView(TemplateView):
 
-#     template_name = 'checkout/cart.html'
+    template_name = 'checkout/cart.html'
 
-#     def get_form_set(self):
-#         CartItemFormSet = modelformset_factory(
-#             CartItem, fields=('quantity',), can_delete=True, extra=0
-#         )
-
-#         if self.request.session.session_key:
-#             formset = CartItemFormSet(
-#                 queryset=CartItem.objects.filter(cart_key=session_key),
-#                 data=self.request.POST or None,
-#                 )
-#         else:
-#             formset = CartItemFormSet(
-#                 queryset=CartItem.objects.none(), data=self.request.POST or None,
-#             )
-#         return formset
-
-#     def get_context_data(self, **kwargs):
-#         context = super(CartItemView, self).get_context_data(**kwargs)
-#         context['formset'] = self.get_form_set()
-#         return context
-
-#     def post(self, request,*args,**kwargs):
-#         formset = self.get_form_set()
-#         if formset.is_valid():
-#             formset.save()
-#             messages.success(request, 'carrinho atualizado com sucesso')
-#         context = self.get_context_data(**kwargs)
-#         return self.render_to_response(context)
-
+    def get_context_data(self, **kwargs):
+        context = super(CartItemView, self).get_context_data(**kwargs)
+        CartItemFormSet = modelformset_factory(
+            CartItem, fields=('quantity',), can_delete=True, extra=0
+        )
+        session_key = self.request.session.session_key
+        if session_key:
+            context['formset'] = CartItemFormSet(
+                queryset=CartItem.objects.filter(cart_key=session_key)
+            )
+        else:
+            context['formset'] = CartItemFormSet(queryset=CartItem.objects.none())
+        return context
 
 create_cartitem = CreateCartItemView.as_view()
-#cart_item = CartItemView.as_view()
+cart_item = CartItemView.as_view()
