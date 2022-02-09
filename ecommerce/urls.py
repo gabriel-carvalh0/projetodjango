@@ -15,19 +15,20 @@ Including another URLconf
 """
 import imp
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include
 from django.views.generic.base import TemplateView
 from app_ecommerce import views
+from django.conf.urls import url
 
 from django.contrib.auth.views import LoginView,  LogoutView
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name="index.html"), name='index'),
-    path('contato/', views.contact, name='contact'),
-    path('entrar/', LoginView.as_view(template_name='login.html'), name='login'),
-    path('sair/', LogoutView.as_view(), {'next_page':'index'},  name='logout'),
-    path(r'^catalogo/', include(('catalog.urls', 'catalog' ), namespace='catalog')),
-    path(r'^conta/', include(('accounts.urls', 'accounts'), namespace='accounts')),
-    path(r'^compras/', include(('checkout.urls', 'checkout'), namespace='checkout')),
-    path('admin/', admin.site.urls),
+    url(r'^$', TemplateView.as_view(template_name="index.html"), name='index'),
+    url(r'^contato/$', views.contact, name='contact'),
+    url(r'^entrar/$', LoginView.as_view(template_name='login.html'), name='login'),
+    url(r'^sair/$', LogoutView.as_view(), {'next_page':'index'},  name='logout'),
+    url(r'^catalogo/', include(('catalog.urls', 'catalog' ), namespace='catalog')),
+    url(r'^conta/', include(('accounts.urls', 'accounts'), namespace='accounts')),
+    url(r'^compras/', include(('checkout.urls', 'checkout'), namespace='checkout')),
+    url(r'^admin/', admin.site.urls),
 ]

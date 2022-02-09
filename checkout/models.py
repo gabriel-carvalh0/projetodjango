@@ -1,6 +1,9 @@
+
+
+from socket import VM_SOCKETS_INVALID_VERSION
 from django.db import models
 
-class CartItemManager(models.Model):
+class CartItemManager(models.Manager):
 
     def add_item(self, cart_key, product):
         if self.filter(cart_key=cart_key, product=product).exists():
@@ -25,7 +28,7 @@ class CartItem(models.Model):
     quantity = models.PositiveIntegerField('Quantidade', default=1)
     price = models.DecimalField('Preço', decimal_places=2, max_digits=8)
 
-    object = CartItemManager()
+    objects = CartItemManager()
 
     class Meta:
         verbose_name = 'Item do Carrinho'

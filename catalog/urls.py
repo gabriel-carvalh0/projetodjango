@@ -1,11 +1,11 @@
 from django.urls import path
-
+from django.conf.urls import url
 from . import views
 
 
 
 urlpatterns = [
-    path(r'^$', views.product_list, name='product_list'),
-    path(r'^(?P<slug>[/w_-]+)/$', views.category, name='category'),
-    path(r'^produtos/(?P<slug>[/w_-]+)/$', views.product, name='product'),
+    url(r'^$', views.product_list, name='product_list'),
+    url(r'^categoria/(?P<slug>.*)/$', views.category, name='category'),
+    url(r'^produtos/(?P<slug>.*)/$', views.product, name='product'),
 ]

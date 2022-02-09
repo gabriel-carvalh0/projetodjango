@@ -1,9 +1,9 @@
 import imp
 from os import name
-from django.urls import path
-
+from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    path(r'carrinho/adicionar/(?P<slug>[/w_-]+)/$', views.create_cartitem, name='create_cartitem' )
+    url(r'carrinho/adicionar/(?P<slug>.*)/$', views.create_cartitem, name='create_cartitem'),
+    #url(r'carrinho/$', views.cartitem, name='cartitem'),
 ]
