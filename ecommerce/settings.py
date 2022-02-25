@@ -60,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'checkout.middleware.cart_item_middleware',
 ]
 
 ROOT_URLCONF = 'ecommerce.urls'
@@ -134,7 +135,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFIELS_DIRS = [
-    os.path.join(BASE_DIR, 'staticfiles')
+    os.path.join(BASE_DIR, 'static')
 ]
 
 # Email

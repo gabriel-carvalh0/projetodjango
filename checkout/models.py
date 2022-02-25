@@ -1,5 +1,6 @@
 
 from itertools import product
+from multiprocessing import Manager
 from tabnanny import verbose
 from django.conf import settings
 from socket import VM_SOCKETS_INVALID_VERSION
@@ -23,7 +24,7 @@ class CartItemManager(models.Manager):
 
 
 
-class CartItem(models.Model):
+class CartItem(models.Model, CartItemManager):
     cart_key = models.CharField(
         'chave de carrinho', max_length=40, db_index=True
     )
@@ -42,6 +43,16 @@ class CartItem(models.Model):
         return '{} [{}]'.format(self.product, self.quantity)
 
 
+class OrderManager(models.Manager):
+
+    def create_order(self, user, cart_items):
+        order = self.create(user=user)
+        for cart_item in cart_items:
+            order_item = OrderItem.objects.create(
+                order=order, quantity=cart_item.quantity, product=cart_item.product,
+                price=cart_item.price
+            )
+        return order
 
 class Order(models.Model):
 
@@ -52,6 +63,7 @@ class Order(models.Model):
     )
 
     PAYMENT_OPTION_CHOICES = (
+        ('deposit', 'Depósito'),
         ('pagseguro', 'PagSeguro'),
         ('paypal', 'Paypal'),
     )
@@ -61,11 +73,14 @@ class Order(models.Model):
         'Situação', choices=STATUS_CHOICES, default=0, blank=True
     )
     payment_option = models.CharField(
-        'Opção de Pagamento', choices=PAYMENT_OPTION_CHOICES, max_length=20
+        'Opção de Pagamento', choices=PAYMENT_OPTION_CHOICES, max_length=20,
+        default='deposit'
     )
 
     created = models.DateTimeField('Criado em', auto_now_add=True)
     modified = models.DateTimeField('Modificado em', auto_now=True)
+
+    objects = OrderManager()
 
     class Meta:
         verbose_name = 'Pedido'

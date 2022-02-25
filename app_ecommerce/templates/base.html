@@ -8,6 +8,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<link rel="stylesheet" href="{% static 'assets/antigo/bootstrap.min.css' %}" media="screen" />
 	<link rel="stylesheet" href="{% static 'assets/custom.min.css' %}" media="screen" />
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
 </head>
 <body>
     <div class="navbar navbar-default navbar-fixed-top">
@@ -36,9 +37,6 @@
 			<li>
 				<a href="{% url 'contact' %}">Contato</a>
 			</li>
-      <li>
-        <a href="{% url 'accounts:register' %}">Registrar Uma Conta</a>
-      </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
