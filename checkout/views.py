@@ -1,4 +1,5 @@
 from socket import CAN_EFF_FLAG
+from urllib import response
 from django.shortcuts import redirect, get_object_or_404
 from django.views.generic import TemplateView
 from django.views.generic import RedirectView
@@ -82,7 +83,9 @@ class CheckoutView(LoginRequiredMixin, TemplateView):
         else:
             messages.info(request, 'não há itens no carrinho de compras')
             return redirect('checkout:cart_item')
-        return super(CheckoutView, self).get(request, *args, **kwargs)
+        response = super(CheckoutView, self).get(request, *args, **kwargs)
+        response.context_data['order'] = order
+        return response
 
 
 create_cartitem = CreateCartItemView.as_view()
