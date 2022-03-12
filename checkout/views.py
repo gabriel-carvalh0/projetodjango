@@ -99,7 +99,16 @@ class OrderListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user)
 
+
+class OrderDetailView(LoginRequiredMixin, ListView):
+
+    template_name = 'checkout/order_detail.html'
+    
+    def get_queryset(self):
+        return Order.objects.filter(user=self.request.user)
+
 create_cartitem = CreateCartItemView.as_view()
 cart_item = CartItemView.as_view()
 checkout = CheckoutView.as_view()
 order_list = OrderListView.as_view()
+order_detail = OrderDetailView.as_view()

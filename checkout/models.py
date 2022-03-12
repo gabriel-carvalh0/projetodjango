@@ -1,11 +1,8 @@
 
-from itertools import product
-from multiprocessing import Manager
-from tabnanny import verbose
-from django.conf import settings
-from socket import VM_SOCKETS_INVALID_VERSION
-from django import dispatch
+from pagseguro import PagSeguro
+
 from django.db import models
+from django.conf import settings
 
 from catalog.models import Product
 
@@ -87,6 +84,7 @@ class Order(models.Model):
     class Meta:
         verbose_name = 'Pedido'
         verbose_name_plural = 'Pedidos'
+        ordering = ['-id']
 
 
     def __str__(self):
@@ -95,6 +93,15 @@ class Order(models.Model):
     def products(self):
         products_ids = self.items.values_list('product')
         return Product.objects.filter(pk__in=products_ids)
+    
+    def total(self):
+        aggregate_queryset = self.items.aggregate(
+            total=models.Sum(
+                models.F('price') * models.F('quantity'),
+                output_field=models.DecimalField()
+            )
+        )
+        return aggregate_queryset['total']
 
 
 class OrderItem(models.Model):
