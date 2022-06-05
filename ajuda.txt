@@ -1,0 +1,3 @@
+Ativar o ambiente: bin/activate
+
+para instalar as dependencias do projeto digite: pip install -r requiriments.txt

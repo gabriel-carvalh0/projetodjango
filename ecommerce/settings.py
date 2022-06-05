@@ -12,9 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 from pyexpat.errors import messages
-from app_dados import env
 
-# from dados import envsample
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'django-insecure-4s$%lxj5c+a%wws-d1qpv!&oh=2kar+h00qb%hcpp6fdjr!uig'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -60,7 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'checkout.middleware.cart_item_middleware',
+    'checkout.middleware.cart_item_middleware',
 ]
 
 ROOT_URLCONF = 'ecommerce.urls'
@@ -173,3 +172,9 @@ MESSAGE_TAGS = {
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+PAGSEGURO_TOKEN = 'EB15E037636A4E71824A0B94C3C21A44'
+PAGSEGURO_EMAIL = 'gabrielmoraiscarvalho659@gmail.com'
+PAGSEGURO_SANDBOX = True

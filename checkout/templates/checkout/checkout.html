@@ -13,14 +13,15 @@ Finalização da compra
 </div>
 <div class="row">
      <div class="col-md-12">
-     <p>
+     <!--
+        <p>
      
         Pedido #{{ order.pk }}
      
-     </p>
+     </p> -->
      </div>
     <div class="col-md-4 col-md-offset-2">
-        <a href="#" class="btn btn-success">Pagar com Pague Seguro</a>
+        <a href="{% url 'checkout:pagseguro_view' order.pk %}" class="btn btn-success">Pagar com Pague Seguro</a>
     </div>
     <div class="col-md-4 col-md-offset-2">
         <a href="#" class="btn btn-primary">Pagar com Pay Pal</a>
