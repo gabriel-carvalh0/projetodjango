@@ -5,12 +5,12 @@ from .models import Product, Category
 
 class CategoryAdmin(admin.ModelAdmin):
 
-    lsit_display = ['name', 'slug', 'created', 'modified']
+    list_display = ['name', 'slug', 'created', 'modified']
     search_fields = ['name', 'slug']
     list_filter = ['created', 'modified']
 
 class ProductAdmin(admin.ModelAdmin):
-    lsit_display = ['name', 'slug', 'created', 'modified']
+    list_display = ['name', 'slug', 'created', 'modified']
     search_fields = ['name', 'slug', 'category__name']
     list_filter = ['created']
 

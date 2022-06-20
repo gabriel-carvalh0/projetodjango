@@ -1,10 +1,10 @@
-
 from pagseguro import PagSeguro
 
 from django.db import models
 from django.conf import settings
-from pagseguro import PagSeguro
+
 from catalog.models import Product
+
 
 class CartItemManager(models.Manager):
 
@@ -20,7 +20,6 @@ class CartItemManager(models.Manager):
                 cart_key=cart_key, product=product, price=product.price
             )
         return cart_item, created
-
 
 
 class CartItem(models.Model, CartItemManager):
@@ -53,8 +52,8 @@ class OrderManager(models.Manager):
             )
         return order
 
-class Order(models.Model):
 
+class Order(models.Model):
     STATUS_CHOICES = (
         (0, 'Aguardando Pagamento'),
         (1, 'Concluída'),
@@ -86,14 +85,13 @@ class Order(models.Model):
         verbose_name_plural = 'Pedidos'
         ordering = ['-id']
 
-
     def __str__(self):
         return 'Pedido #{}'.format(self.pk)
 
     def products(self):
         products_ids = self.items.values_list('product')
         return Product.objects.filter(pk__in=products_ids)
-    
+
     def total(self):
         aggregate_queryset = self.items.aggregate(
             total=models.Sum(
@@ -104,43 +102,7 @@ class Order(models.Model):
         return aggregate_queryset['total']
 
 
-    def pagseguro_update_status(self, status):
-        if status == '3':
-            self.status = 1
-        elif status == '7':
-            self.status = 2
-        self.save()
-
-    def complete(self):
-        self.status = 1
-        self.save()
-
-    def pagseguro(self):
-        self.payment_option = 'pagseguro'
-        self.save()
-        pg = PagSeguro(
-            email=settings.PAGSEGURO_EMAIL, token=settings.PAGSEGURO_TOKEN,
-            config={'sandbox', settings.PAGSEGURO_SANDBOX}
-        )
-        pg.sender = {
-            'email': self.user.email
-        }
-        pg.reference_prefix = ''
-        pg.shipping = None
-        pg.reference = self.pk
-        for item in self.items.all():
-            pg.items.append(
-                {
-                    'id': item.product.pk,
-                    'description': item.product.name,
-                    'quantity': item.quantity,
-                    'amount': '%.2f' % item.prince
-                }
-            )
-            return pg
-
 class OrderItem(models.Model):
-
     order = models.ForeignKey(Order, verbose_name='Pedido', related_name='items', on_delete=models.CASCADE)
     product = models.ForeignKey('catalog.Product', verbose_name='Produto', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField('Quantidade', default=1)
@@ -157,7 +119,6 @@ class OrderItem(models.Model):
 def post_save_cart_item(instance, **kwargs):
     if instance.quantity < 1:
         instance.delete()
-
 
 
 models.signals.post_save.connect(
